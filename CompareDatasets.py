@@ -1,7 +1,7 @@
 import os
 from typing import Tuple, List
 
-from cv2 import cv2
+from cv2 import cv2, countNonZero, cvtColor
 
 from PIL import Image, ImageChops
 from tqdm import tqdm
@@ -36,11 +36,11 @@ def align_images_with_opencv(path_to_desired_image: str, path_to_image_to_warp: 
     warp_matrix = np.eye(2, 3, dtype=np.float32)
 
     # Specify the number of iterations.
-    number_of_iterations = 50
+    number_of_iterations = 100
 
     # Specify the threshold of the increment
     # in the correlation coefficient between two iterations
-    termination_eps = 1e-6
+    termination_eps = 1e-7
 
     # Define termination criteria
     criteria = (cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, number_of_iterations, termination_eps)
@@ -188,3 +188,10 @@ if __name__ == "__main__":
 
     # Check the integrity of WI dataset
     check_writer_identification_dataset_integrity(writer_identification_dataset_dir, writers)
+
+    print("Number on non-black pixels in the diff images:")
+    for diff_file in os.listdir(output_diff_directory):
+        diff_image = cv2.imread(os.path.join(output_diff_directory, diff_file), cv2.IMREAD_GRAYSCALE) + 1
+        non_zeroes = countNonZero(diff_image)
+        if non_zeroes > 5000:
+            print("{0}: {1}".format(diff_file, non_zeroes))
