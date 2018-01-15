@@ -189,9 +189,10 @@ if __name__ == "__main__":
     # Check the integrity of WI dataset
     check_writer_identification_dataset_integrity(writer_identification_dataset_dir, writers)
 
-    print("Number on non-black pixels in the diff images:")
+    pixel_treshold = 5000
+    print("Number on non-black pixels in the diff images (above threshold of {0} pixels):".format(pixel_treshold))
     for diff_file in os.listdir(output_diff_directory):
         diff_image = cv2.imread(os.path.join(output_diff_directory, diff_file), cv2.IMREAD_GRAYSCALE) + 1
         non_zeroes = countNonZero(diff_image)
-        if non_zeroes > 5000:
+        if non_zeroes > pixel_treshold:
             print("{0}: {1}".format(diff_file, non_zeroes))
