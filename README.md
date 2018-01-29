@@ -3,6 +3,8 @@ Helper scripts for the [CVC-MUSCIMA dataset](http://www.cvc.uab.es/cvcmuscima/in
 The provided Python 3 script is capable of automatically aligning the Writer-Identification and 
 Staff-Removal datasets, that are currently slightly misaligned.
 
+Some additional explanations are available in my [blog entry](https://alexanderpacha.com/2018/01/29/aligning-images-an-engineers-solution/).
+
 # License
 
 Published under MIT License,
