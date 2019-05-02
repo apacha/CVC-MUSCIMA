@@ -94,4 +94,5 @@ ENV/
 .ropeproject
 
 # PyCharm
-.idea/
+/CVCMUSCIMA_MCA_Flat/
+/CVCMUSCIMA_MultiConditionAligned/
